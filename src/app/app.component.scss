@@ -1,0 +1,45 @@
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    z-index: 1000;  
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navbar li {
+    margin: 0 15px;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  
+ 
+  .content-container {
+    margin-top: 60px;  /* Ajuste a altura conforme necessário */
+    padding: 20px;
+  }
+  

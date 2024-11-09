@@ -1,0 +1,5 @@
+<p *ngIf="items.length > 0">Lista de itens:</p>
+<ul>
+  <li *ngFor="let item of items">{{ item }}</li>
+</ul>
+<p *ngIf="items.length === 0">Nenhum item encontrado.</p>

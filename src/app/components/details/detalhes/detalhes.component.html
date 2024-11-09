@@ -1,0 +1,22 @@
+<div>
+    <img src=".\assets\Voltar.svg" alt="" style="width: 32px;cursor: pointer;" [routerLink]="['/produto']">
+</div>
+<div *ngIf="product" class="product-details">
+    <h2 class="product-title">{{ product.title }}</h2>
+    
+    <div class="product-info">
+      <img [src]="product.image" alt="{{ product.title }}" class="product-image">
+      
+      <div class="product-text">
+        <p class="product-description">{{ product.description }}</p>
+        <p><strong>Preço:</strong> {{ product.price | currency }}</p>
+        <p><strong>Categoria:</strong> {{ product.category }}</p>
+        <button class="buy-button">Comprar</button>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!product" class="loading">
+    <p>Carregando detalhes do produto...</p>
+  </div>
+  

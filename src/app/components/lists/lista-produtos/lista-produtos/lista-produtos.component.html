@@ -1,0 +1,76 @@
+<div class="filters">
+  <div class="busca">
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Buscar produto"
+      (input)="onSearch()"
+    />
+  </div>
+  <div class="categoria">
+    <label for="category">Filtrar por Categoria:</label>
+    <select id="category" [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </div>
+  <button (click)="openCartModal()" class="cart-icon">
+    🛒 Carrinho ({{ carrinho.length }})
+  </button>
+</div>
+
+
+<div class="centraliza-produtos">
+  <div class="produtos">
+    <div *ngFor="let product of filteredProducts" class="product-card"  >
+      <img [src]="product.image" alt="{{ product.title }}" class="product-image" />
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.description }}</p>
+      <p>Preço: {{ product.price | currency }}</p>
+      <p>Categoria: {{ product.category }}</p>
+        <button (click)="addToCart(product)" class="details-btn">Comprar</button>
+        <button  [routerLink]="['/produto', product.id]" class="details-btn">Detalhes</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="cart-modal-overlay" *ngIf="modalAberto"></div>
+<div class="cart-modal" *ngIf="modalAberto" >
+  <div class="cart-modal-content" (click)="$event.stopPropagation()">
+   <img src=".\assets\Close.svg" alt=""(click)="closeCartModal()" style="cursor: pointer;">
+    <h2>Carrinho de Compras</h2>
+    <ul>
+      <li *ngFor="let item of carrinho">
+        <img [src]="item.image" alt="{{ item.title }}" class="product-image" />
+        <div class="cart-item-details">
+          <span class="item-title">{{ item.title }}</span>
+          <div class="quantity-controls">
+            <button (click)="increaseQuantity(item)">+</button>
+            <span>{{ item.quantity || 1 }}</span>
+            <button (click)="decreaseQuantity(item)">-</button>
+          </div>
+          <div class="item-price">
+            <span>Preço:</span>
+            <span>{{ item.price | currency }}</span>
+          </div>
+        </div>
+        <button (click)="removeItem(item)" style="background-color: red;cursor: pointer; color: white; border: none; height: 25px; border-radius: 5px;">Remover</button>
+      </li>
+    </ul>
+    <div class="cart-total">
+      <p>Total: {{ getTotal() | currency }}</p>
+    </div>
+    <button class="checkout-btn">Finalizar Compra</button>
+  </div>
+</div>
+
+
+
+<div class="pagination">
+  <button (click)="changePage('prev')" [disabled]="currentPage === 1">Anterior</button>
+  <span>Página {{ currentPage }}</span>
+  <button (click)="changePage('next')" [disabled]="isLastPage()">Próxima</button>
+</div>
